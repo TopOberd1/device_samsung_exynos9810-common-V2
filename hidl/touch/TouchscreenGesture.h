@@ -50,6 +50,7 @@ class TouchscreenGesture : public ITouchscreenGesture {
         const char* name;
     } GestureInfo;
     static const std::map<int32_t, GestureInfo> kGestureInfoMap;  // id -> info
+
 };
 
 // FIXME: most likely delete, this is only for passthrough implementations

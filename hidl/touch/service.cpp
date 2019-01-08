@@ -21,6 +21,9 @@
 #include <hidl/HidlTransportSupport.h>
 
 #include "GloveMode.h"
+#include "KeyDisabler.h"
+#include "StylusMode.h"
+#include "TouchscreenGesture.h"
 
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
@@ -29,9 +32,15 @@ using android::status_t;
 using android::OK;
 
 using ::vendor::lineage::touch::V1_0::samsung::GloveMode;
+using ::vendor::lineage::touch::V1_0::samsung::KeyDisabler;
+using ::vendor::lineage::touch::V1_0::samsung::StylusMode;
+using ::vendor::lineage::touch::V1_0::samsung::TouchscreenGesture;
 
 int main() {
     sp<GloveMode> gloveMode;
+    sp<KeyDisabler> keyDisabler;
+    sp<StylusMode> stylusMode;
+    sp<TouchscreenGesture> touchscreenGesture;
     status_t status;
 
     LOG(INFO) << "Touch HAL service is starting.";
@@ -42,13 +51,32 @@ int main() {
         goto shutdown;
     }
 
+    keyDisabler = new KeyDisabler();
+    if (keyDisabler == nullptr) {
+        LOG(ERROR) << "Can not create an instance of Touch HAL KeyDisabler Iface, exiting.";
+        goto shutdown;
+    }
+
+    stylusMode = new StylusMode();
+    if (stylusMode == nullptr) {
+        LOG(ERROR) << "Can not create an instance of Touch HAL StylusMode Iface, exiting.";
+        goto shutdown;
+    }
+
+    touchscreenGesture = new TouchscreenGesture();
+    if (touchscreenGesture == nullptr) {
+        LOG(ERROR) << "Can not create an instance of Touch HAL TouchscreenGesture Iface, exiting.";
+        goto shutdown;
+    }
+
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
     if (gloveMode->isSupported()) {
         status = gloveMode->registerAsService();
         if (status != OK) {
-            LOG(ERROR) << "Could not register service for Touch HAL GloveMode Iface (" << status
-                       << ")";
+            LOG(ERROR)
+                << "Could not register service for Touch HAL GloveMode Iface ("
+                << status << ")";
             goto shutdown;
         }
     }
@@ -56,8 +84,9 @@ int main() {
     if (keyDisabler->isSupported()) {
         status = keyDisabler->registerAsService();
         if (status != OK) {
-            LOG(ERROR) << "Could not register service for Touch HAL KeyDisabler Iface (" << status
-                       << ")";
+            LOG(ERROR)
+                << "Could not register service for Touch HAL KeyDisabler Iface ("
+                << status << ")";
             goto shutdown;
         }
     }
@@ -65,8 +94,9 @@ int main() {
     if (stylusMode->isSupported()) {
         status = stylusMode->registerAsService();
         if (status != OK) {
-            LOG(ERROR) << "Could not register service for Touch HAL StylusMode Iface (" << status
-                       << ")";
+            LOG(ERROR)
+                << "Could not register service for Touch HAL StylusMode Iface ("
+                << status << ")";
             goto shutdown;
         }
     }
@@ -74,15 +104,16 @@ int main() {
     if (touchscreenGesture->isSupported()) {
         status = touchscreenGesture->registerAsService();
         if (status != OK) {
-            LOG(ERROR) << "Could not register service for Touch HAL TouchscreenGesture Iface ("
-                       << status << ")";
+            LOG(ERROR)
+                << "Could not register service for Touch HAL TouchscreenGesture Iface ("
+                << status << ")";
             goto shutdown;
         }
     }
 
     LOG(INFO) << "Touch HAL service is ready.";
     joinRpcThreadpool();
-// Should not pass this line
+    // Should not pass this line
 
 shutdown:
     // In normal operation, we don't expect the thread pool to shutdown
