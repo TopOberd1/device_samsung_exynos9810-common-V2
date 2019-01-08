@@ -14,49 +14,28 @@
  * limitations under the License.
  */
 
-#include <fstream>
-
 #include "StylusMode.h"
 
 namespace vendor {
 namespace lineage {
 namespace touch {
 namespace V1_0 {
-namespace samsung {
-
-bool StylusMode::isSupported() {
-    std::ifstream file("/sys/class/sec/tsp/cmd_list");
-    if (file.is_open()) {
-        std::string line;
-        while (getline(file, line)) {
-            if (!line.compare("hover_enable"))
-                return true;
-        }
-        file.close();
-    }
-    return false;
-}
+namespace implementation {
 
 // Methods from ::vendor::lineage::touch::V1_0::IStylusMode follow.
-Return<bool> StylusMode::isEnabled() {
-    std::ifstream file("/sys/class/sec/tsp/cmd_result");
-    if (file.is_open()) {
-        std::string line;
-        getline(file, line);
-        if (!line.compare("hover_enable,1:OK"))
-            return true;
-        file.close();
-    }
-    return false;
+Return<void> StylusMode::setEnabled(bool enabled) {
+    // TODO implement
+    return Void();
 }
 
-Return<bool> StylusMode::setEnabled(bool enabled) {
-    std::ofstream file("/sys/class/sec/tsp/cmd");
-    file << "hover_enable," << (enabled ? "1" : "0");
-    return true;
-}
 
-}  // namespace samsung
+// Methods from ::android::hidl::base::V1_0::IBase follow.
+
+//IStylusMode* HIDL_FETCH_IStylusMode(const char* /* name */) {
+    //return new StylusMode();
+//}
+//
+}  // namespace implementation
 }  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage

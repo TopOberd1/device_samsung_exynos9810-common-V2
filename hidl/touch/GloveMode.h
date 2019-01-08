@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2022 The LineageOS Project
+ * Copyright (C) 2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-#pragma once
+#ifndef VENDOR_LINEAGE_TOUCH_V1_0_GLOVEMODE_H
+#define VENDOR_LINEAGE_TOUCH_V1_0_GLOVEMODE_H
 
+#include <vendor/lineage/touch/1.0/IGloveMode.h>
 #include <hidl/MQDescriptor.h>
 #include <hidl/Status.h>
-#include <vendor/lineage/touch/1.0/IGloveMode.h>
-#include "samsung_touch.h"
 
 namespace vendor {
 namespace lineage {
 namespace touch {
 namespace V1_0 {
-namespace samsung {
+namespace implementation {
 
 using ::android::hardware::hidl_array;
 using ::android::hardware::hidl_memory;
@@ -35,21 +35,21 @@ using ::android::hardware::Return;
 using ::android::hardware::Void;
 using ::android::sp;
 
-class GloveMode : public IGloveMode {
-  public:
-    GloveMode() = default;
-
-    bool isSupported();
-
+struct GloveMode : public IGloveMode {
     // Methods from ::vendor::lineage::touch::V1_0::IGloveMode follow.
-    Return<bool> isEnabled() override;
-    Return<bool> setEnabled(bool enabled) override;
+    Return<void> setEnabled(bool enabled) override;
 
     // Methods from ::android::hidl::base::V1_0::IBase follow.
+
 };
 
-}  // namespace samsung
+// FIXME: most likely delete, this is only for passthrough implementations
+// extern "C" IGloveMode* HIDL_FETCH_IGloveMode(const char* name);
+
+}  // namespace implementation
 }  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
+
+#endif  // VENDOR_LINEAGE_TOUCH_V1_0_GLOVEMODE_H

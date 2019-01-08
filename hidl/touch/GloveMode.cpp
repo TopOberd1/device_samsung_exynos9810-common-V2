@@ -14,49 +14,28 @@
  * limitations under the License.
  */
 
-#include <fstream>
-
 #include "GloveMode.h"
 
 namespace vendor {
 namespace lineage {
 namespace touch {
 namespace V1_0 {
-namespace samsung {
-
-bool GloveMode::isSupported() {
-    std::ifstream file("/sys/class/sec/tsp/cmd_list");
-    if (file.is_open()) {
-        std::string line;
-        while (getline(file, line)) {
-            if (!line.compare("glove_mode"))
-                return true;
-        }
-        file.close();
-    }
-    return false;
-}
+namespace implementation {
 
 // Methods from ::vendor::lineage::touch::V1_0::IGloveMode follow.
-Return<bool> GloveMode::isEnabled() {
-    std::ifstream file("/sys/class/sec/tsp/cmd_result");
-    if (file.is_open()) {
-        std::string line;
-        getline(file, line);
-        if (!line.compare("glove_mode,1:OK"))
-            return true;
-        file.close();
-    }
-    return false;
+Return<void> GloveMode::setEnabled(bool enabled) {
+    // TODO implement
+    return Void();
 }
 
-Return<bool> GloveMode::setEnabled(bool enabled) {
-    std::ofstream file("/sys/class/sec/tsp/cmd");
-    file << "glove_mode," << (enabled ? "1" : "0");
-    return true;
-}
 
-}  // namespace samsung
+// Methods from ::android::hidl::base::V1_0::IBase follow.
+
+//IGloveMode* HIDL_FETCH_IGloveMode(const char* /* name */) {
+    //return new GloveMode();
+//}
+//
+}  // namespace implementation
 }  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
