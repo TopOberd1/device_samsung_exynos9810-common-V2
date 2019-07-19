@@ -53,6 +53,33 @@ int main() {
         }
     }
 
+    if (keyDisabler->isSupported()) {
+        status = keyDisabler->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for Touch HAL KeyDisabler Iface (" << status
+                       << ")";
+            goto shutdown;
+        }
+    }
+
+    if (stylusMode->isSupported()) {
+        status = stylusMode->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for Touch HAL StylusMode Iface (" << status
+                       << ")";
+            goto shutdown;
+        }
+    }
+
+    if (touchscreenGesture->isSupported()) {
+        status = touchscreenGesture->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for Touch HAL TouchscreenGesture Iface ("
+                       << status << ")";
+            goto shutdown;
+        }
+    }
+
     LOG(INFO) << "Touch HAL service is ready.";
     joinRpcThreadpool();
 // Should not pass this line
