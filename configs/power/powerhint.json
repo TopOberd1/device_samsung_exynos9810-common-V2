@@ -17,6 +17,7 @@
             "Name": "CPULittleClusterMinFreq",
             "Path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq",
             "Values": [
+                "1794000",
                 "1248000",
                 "1053000",
                 "832000",
@@ -40,6 +41,7 @@
             "Name": "CPUBigClusterMinFreq",
             "Path": "/sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq",
             "Values": [
+                "2002000",
                 "1794000",
                 "1469000",
                 "1261000",
@@ -66,7 +68,7 @@
             "Values": [
                 "455000",
                 "338000",
-                "299000",
+                "299000"
             ],
             "ResetOnInit": true
         },
@@ -141,20 +143,20 @@
         {
             "PowerHint": "LAUNCH",
             "Node": "CPUBigClusterMaxFreq",
-            "Duration": 5000,
+            "Duration": 3000,
             "Value": "2314000"
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "CPUBigClusterMinFreq",
-            "Duration": 5000,
-            "Value": "1066000"
+            "Duration": 3000,
+            "Value": "2002000"
         },
         {
             "PowerHint": "LAUNCH",
             "Node": "CPULittleClusterMinFreq",
-            "Duration": 5000,
-            "Value": "1248000"
+            "Duration": 3000,
+            "Value": "1794000"
         },
         {
             "PowerHint": "LAUNCH",
@@ -250,7 +252,7 @@
             "PowerHint": "SUSTAINED_PERFORMANCE",
             "Node": "GPUMaxFreq",
             "Duration": 0,
-            "Value": "455000"
+            "Value": "546000"
         },
         {
             "PowerHint": "VR_MODE",
