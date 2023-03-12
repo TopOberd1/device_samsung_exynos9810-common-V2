@@ -64,7 +64,7 @@ public:
 private:
     ndk::ScopedAStatus activate(uint32_t ms);
     uint32_t effectToMs(Effect effect, ndk::ScopedAStatus* status);
-    static float strengthToAmplitude(EffectStrength strength, ndk::ScopedAStatus* status);
+    static uint8_t strengthToAmplitude(EffectStrength strength, ndk::ScopedAStatus* status);
 
     bool mEnabled{false};
     bool mExternalControl{false};
