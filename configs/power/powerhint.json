@@ -16,8 +16,7 @@
             "Path": "/sys/kernel/gpu/gpu_min_clock",
             "Values": [
                 "455000",
-                "338000",
-                "299000"
+                "338000"
             ],
             "ResetOnInit": true
         },
