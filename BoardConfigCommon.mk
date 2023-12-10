@@ -95,11 +95,11 @@ USE_OPENGL_RENDERER := true
 HWUI_COMPILE_FOR_PERF := true
 
 # Kernel
-BOARD_KERNEL_IMAGE_NAME := Image
-BOARD_KERNEL_SEPARATED_DT := true
-TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_SOURCE := kernel/samsung/exynos9810
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+#BOARD_KERNEL_SEPARATED_DT := true
+#TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
+#TARGET_KERNEL_CLANG_COMPILE := true
+#TARGET_KERNEL_SOURCE := kernel/samsung/exynos9810
 TARGET_LINUX_KERNEL_VERSION := 4.9
 
 # Manifest
@@ -153,7 +153,7 @@ ENABLE_VENDOR_RIL_SERVICE := true
 
 # Sepolicy
 BOARD_SEPOLICY_TEE_FLAVOR := mobicore
-include device/custom/sepolicy/exynos/sepolicy.mk
+
 include device/samsung_slsi/sepolicy/sepolicy.mk
 
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
