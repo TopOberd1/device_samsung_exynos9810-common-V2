@@ -44,9 +44,13 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a53
 
 # Boot Image
+
+PRODUCT_COPY_FILES += \
+	$(BOARD_KERNEL_PREBUILT_DT):dt.img
+
 BOARD_BOOT_HEADER_VERSION := 0
 BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg/mkbootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg/mkbootimg_prebuilt.mk
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -55,6 +59,7 @@ BOARD_KERNEL_TAGS_OFFSET     := 0x00000100
 
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_KERNEL_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+#BOARD_MKBOOTIMG_ARGS += --dt $(BOARD_KERNEL_PREBUILT_DT)
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 
 # Compression
@@ -98,9 +103,11 @@ HWUI_COMPILE_FOR_PERF := true
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DT := true
 TARGET_CUSTOM_DTBTOOL := dtbhtoolExynos
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_SOURCE := kernel/samsung/exynos9810
+#TARGET_KERNEL_CLANG_COMPILE := true
+#TARGET_KERNEL_SOURCE := kernel/samsung/exynos9810
 TARGET_LINUX_KERNEL_VERSION := 4.9
+
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 # Manifest
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/vintf/manifest.xml
@@ -152,7 +159,7 @@ ENABLE_VENDOR_RIL_SERVICE := true
 
 # Sepolicy
 BOARD_SEPOLICY_TEE_FLAVOR := mobicore
-include device/custom/sepolicy/exynos/sepolicy.mk
+#include device/custom/sepolicy/exynos/sepolicy.mk
 include device/samsung_slsi/sepolicy/sepolicy.mk
 
 BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
