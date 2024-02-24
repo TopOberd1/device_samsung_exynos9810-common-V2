@@ -62,12 +62,6 @@
             "Value": "44"
         },
         {
-            "PowerHint": "LAUNCH",
-            "Node": "CPUBigClusterMinFreq",
-            "Duration": 5000,
-            "Value": "1794000"
-        },
-        {
             "PowerHint": "INTERACTION",
             "Node": "CPUBigClusterMinFreq",
             "Duration": 0,
@@ -107,7 +101,7 @@
             "PowerHint": "EXPENSIVE_RENDERING",
             "Node": "GPUMinFreq",
             "Duration": 0,
-            "Value": "338000"
+            "Value": "455000"
         },
         {
             "PowerHint": "EXPENSIVE_RENDERING",
