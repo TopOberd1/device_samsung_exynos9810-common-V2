@@ -106,6 +106,9 @@ TARGET_LINUX_KERNEL_VERSION := 4.9
 # Manifest
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/configs/vintf/manifest.xml
 DEVICE_MATRIX_FILE := $(COMMON_PATH)/configs/vintf/compatibility_matrix.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+    $(COMMON_PATH)/configs/vintf/framework_compatibility_matrix.xml \
+    vendor/lineage/config/device_framework_matrix.xml
 
 # NGA
 TARGET_SUPPORTS_NEXT_GEN_ASSISTANT := true
@@ -143,9 +146,6 @@ BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.samsungexynos9810
 
-## Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)/releasetools
-
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)/releasetools
 
@@ -175,4 +175,5 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 
 # SLSI
-include $(COMMON_PATH)/BoardConfigSLSI.mk
+# include $(COMMON_PATH)/BoardConfigSLSI.mk
+include hardware/samsung_slsi-linaro/config/BoardConfig9810.mk
