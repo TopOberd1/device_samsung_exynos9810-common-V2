@@ -13,7 +13,7 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
-SOC_BASE_PATH := $(TOP)/hardware/samsung_slsi-linaro/exynos
+SOC_BASE_PATH := $(TOP)/hardware/samsung_slsi/exynos
 
 include $(CLEAR_VARS)
 
